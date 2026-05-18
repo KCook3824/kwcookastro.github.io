@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyle W. Cook | PhD Candidate in Astrophysics</title>
+  <meta name="description" content="Kyle W. Cook — PhD Candidate in Physics and Astronomy at the University of Louisville. Research in galaxy evolution, star formation, and astronomical instrumentation." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design tokens ─────────────────────────────────────── */
+    :root {
+      --bg:          #08090f;
+      --bg-panel:    #0e1020;
+      --bg-card:     #111426;
+      --border:      rgba(100, 130, 200, 0.15);
+      --border-glow: rgba(100, 160, 255, 0.3);
+      --text:        #d8dff0;
+      --text-muted:  #7a88aa;
+      --text-dim:    #4a5570;
+      --accent:      #7eb8f7;
+      --accent2:     #a78bfa;
+      --accent3:     #5ee7c4;
+      --gold:        #e8c87a;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Outfit', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+      --nav-h:        64px;
+      --max-w:        1100px;
+    }
+
+    /* ─── Reset & base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: transparent;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    a:hover { color: #fff; }
+
+    img { max-width: 100%; display: block; }
+
+    /* ─── Background image ──────────────────────────────────── */
+    #bg-image {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background-image: url('Chandra_Deep_Field_South.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    /* ─── Layout helpers ────────────────────────────────────── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      position: relative;
+      z-index: 3;
+      padding: 5rem 0;
+    }
+
+    section:not(:last-of-type) {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent3);
+      margin-bottom: .75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* ─── Navigation ────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      background: rgba(8, 9, 15, .85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: .03em;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-muted);
+      transition: .3s;
+    }
+
+    /* ─── Hero ──────────────────────────────────────────────── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: calc(var(--nav-h) + 2rem);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent3);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp .7s .1s forwards;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp .7s .2s forwards;
+    }
+
+    .hero-name strong {
+      font-weight: 600;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp .7s .3s forwards;
+    }
+
+    .hero-bio {
+      color: var(--text-muted);
+      font-size: .95rem;
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp .7s .4s forwards;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .7s .5s forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .65rem 1.4rem;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      transition: .2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #080912;
+      border: none;
+    }
+    .btn-primary:hover { background: #fff; color: #080912; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeUp .7s .6s forwards;
+    }
+
+    .social-icon {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text-muted);
+      font-size: .8rem;
+      transition: .2s;
+    }
+    .social-icon:hover { border-color: var(--accent3); color: var(--accent3); }
+
+    /* orbit graphic */
+    .hero-visual {
+      position: relative;
+      width: 360px;
+      height: 360px;
+      opacity: 0;
+      animation: fadeIn 1s .6s forwards;
+      flex-shrink: 0;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(126, 184, 247, .15);
+    }
+
+    .orbit-1 { width: 100%; height: 100%; top: 0; left: 0; animation: spin 40s linear infinite; }
+    .orbit-2 { width: 70%; height: 70%; top: 15%; left: 15%; animation: spin 25s linear infinite reverse; }
+    .orbit-3 { width: 40%; height: 40%; top: 30%; left: 30%; animation: spin 15s linear infinite; }
+
+    .orbit-dot {
+      position: absolute;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      top: -3px; left: calc(50% - 3px);
+    }
+
+    .orbit-1 .orbit-dot { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+    .orbit-2 .orbit-dot { background: var(--accent2); box-shadow: 0 0 10px var(--accent2); }
+    .orbit-3 .orbit-dot { background: var(--accent3); box-shadow: 0 0 8px var(--accent3); }
+
+    .center-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(126,184,247,.5) 0%, transparent 70%);
+      box-shadow: 0 0 60px rgba(126,184,247,.3);
+    }
+
+    /* ─── About / Quick facts ───────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p { color: var(--text-muted); margin-bottom: 1.2rem; }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .fact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.2rem;
+      transition: border-color .2s;
+    }
+    .fact-card:hover { border-color: var(--border-glow); }
+
+    .fact-label {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: .4rem;
+    }
+
+    .fact-value {
+      font-size: .9rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ─── Research ──────────────────────────────────────────── */
+    .research-intro {
+      color: var(--text-muted);
+      max-width: 720px;
+      margin-bottom: 3rem;
+    }
+
+    .research-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .research-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+    .research-card:hover { border-color: var(--border-glow); transform: translateY(-3px); }
+
+    .research-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .research-card:nth-child(1)::before { background: var(--accent); }
+    .research-card:nth-child(2)::before { background: var(--accent2); }
+    .research-card:nth-child(3)::before { background: var(--accent3); }
+
+    .rc-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .rc-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: .75rem;
+    }
+
+    .rc-desc { font-size: .88rem; color: var(--text-muted); }
+
+    /* ─── Publications ──────────────────────────────────────── */
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .pub-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      transition: border-color .2s;
+    }
+    .pub-item:hover { border-color: var(--border-glow); }
+
+    .pub-year {
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--gold);
+      padding-top: .15rem;
+      white-space: nowrap;
+    }
+
+    .pub-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: .4rem;
+      line-height: 1.3;
+    }
+
+    .pub-authors { font-size: .82rem; color: var(--text-muted); margin-bottom: .5rem; }
+
+    .pub-journal {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--text-dim);
+    }
+
+    .pub-link {
+      display: inline-block;
+      margin-top: .6rem;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: .2rem .6rem;
+      border-radius: 2px;
+      transition: .2s;
+    }
+    .pub-link:hover { border-color: var(--accent); background: rgba(126,184,247,.08); }
+
+    .publications-note {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: .88rem;
+      color: var(--text-dim);
+    }
+    .publications-note a { color: var(--accent); }
+
+    /* ─── CV / Experience ───────────────────────────────────── */
+    .cv-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .cv-section-title {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1.5rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 8px 1fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+
+    .tl-dot-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: .45rem;
+    }
+
+    .tl-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .tl-line {
+      width: 1px;
+      flex: 1;
+      background: var(--border);
+      margin-top: 4px;
+      min-height: 24px;
+    }
+
+    .tl-date {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-dim);
+      margin-bottom: .2rem;
+    }
+
+    .tl-title {
+      font-weight: 600;
+      color: #fff;
+      font-size: .95rem;
+    }
+
+    .tl-sub {
+      font-size: .82rem;
+      color: var(--accent);
+      margin-bottom: .3rem;
+    }
+
+    .tl-desc { font-size: .82rem; color: var(--text-muted); }
+
+    .cv-download {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    /* ─── Service ───────────────────────────────────────────── */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      transition: border-color .2s;
+    }
+    .service-card:hover { border-color: var(--border-glow); }
+
+    .service-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .2rem .55rem;
+      border-radius: 2px;
+      margin-bottom: .8rem;
+    }
+
+    .tag-outreach  { background: rgba(94,231,196,.1);  color: var(--accent3); border: 1px solid rgba(94,231,196,.25); }
+    .tag-review    { background: rgba(126,184,247,.1); color: var(--accent);  border: 1px solid rgba(126,184,247,.25); }
+    .tag-committee { background: rgba(167,139,250,.1); color: var(--accent2); border: 1px solid rgba(167,139,250,.25); }
+    .tag-mentoring { background: rgba(232,200,122,.1); color: var(--gold);    border: 1px solid rgba(232,200,122,.25); }
+
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: .4rem;
+    }
+
+    .service-meta {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-dim);
+      margin-bottom: .6rem;
+    }
+
+    .service-desc { font-size: .85rem; color: var(--text-muted); }
+
+    /* ─── Blog / Notes ──────────────────────────────────────── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.8rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s, transform .2s;
+    }
+    .blog-card:hover { border-color: var(--border-glow); transform: translateY(-2px); }
+
+    .blog-date {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-dim);
+      margin-bottom: .6rem;
+    }
+
+    .blog-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: .75rem;
+      line-height: 1.3;
+    }
+
+    .blog-excerpt { font-size: .83rem; color: var(--text-muted); flex: 1; margin-bottom: 1.2rem; }
+
+    .blog-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .2rem .55rem;
+      border-radius: 2px;
+      background: rgba(126,184,247,.08);
+      color: var(--accent);
+      border: 1px solid rgba(126,184,247,.2);
+      margin-bottom: .6rem;
+      align-self: flex-start;
+    }
+
+    .blog-read-more {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: auto;
+    }
+    .blog-read-more:hover { color: #fff; }
+
+    .blog-cta {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    /* ─── Contact ───────────────────────────────────────────── */
+    #contact { padding-bottom: 6rem; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info p {
+      font-size: .9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .address-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 2;
+      margin-bottom: 2rem;
+    }
+    .address-block strong { color: var(--text); }
+
+    .contact-social {
+      display: flex;
+      gap: .75rem;
+    }
+
+    .social-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .55rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: .2s;
+    }
+    .social-pill:hover { border-color: var(--accent); color: var(--accent); }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .form-group label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: .75rem 1rem;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: .9rem;
+      resize: none;
+      transition: border-color .2s;
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group textarea { height: 120px; }
+
+    /* ─── Footer ────────────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 3;
+      background: var(--bg-panel);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ─── Animations ────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ─── Responsive ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-grid       { grid-template-columns: 1fr; }
+      .hero-visual     { display: none; }
+      .about-grid      { grid-template-columns: 1fr; }
+      .research-cards  { grid-template-columns: 1fr 1fr; }
+      .cv-cols         { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-grid    { grid-template-columns: 1fr; }
+      .blog-grid       { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links       { display: none; }
+      .nav-toggle      { display: flex; }
+      .nav-links.open  { display: flex; flex-direction: column; position: absolute; top: var(--nav-h); left: 0; right: 0; background: rgba(8,9,15,.97); padding: 1.5rem 2rem; gap: 1.5rem; border-bottom: 1px solid var(--border); }
+      section          { padding: 3.5rem 0; }
+      .research-cards  { grid-template-columns: 1fr; }
+      .blog-grid       { grid-template-columns: 1fr; }
+      .service-grid    { grid-template-columns: 1fr; }
+      .facts-grid      { grid-template-columns: 1fr; }
+      .form-row        { grid-template-columns: 1fr; }
+      .footer-inner    { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background image layer -->
+<div id="bg-image"></div>
+
+<!-- ─── Navigation ──────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">Kyle W. <span>Cook</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#service">Service</a></li>
+      <li><a href="#notes">Notes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── Hero ────────────────────────────────────────────────── -->
+<section id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-eyebrow">PhD Candidate · Physics & Astronomy</p>
+        <h1 class="hero-name">Kyle W.<strong>Cook</strong></h1>
+        <p class="hero-title">Astrophysicist & Galaxy Evolutionist</p>
+        <p class="hero-bio">
+          I study the large-scale questions of the universe — how galaxies evolve, how gas
+          correlates with star formation, and the instrumentation that makes it all possible.
+          Currently based at the University of Louisville.
+        </p>
+        <div class="hero-links">
+          <a href="#research" class="btn btn-primary">View Research</a>
+          <a href="CV_KyleCook.pdf" class="btn btn-outline" target="_blank">Download CV</a>
+        </div>
+        <div class="hero-social">
+          <a href="http://www.linkedin.com/in/kwcook3824" class="social-icon" target="_blank" title="LinkedIn">in</a>
+          <a href="https://orcid.org/0000-0002-4012-779X" class="social-icon" target="_blank" title="ORCID">id</a>
+          <a href="https://scholar.google.com/citations?user=28cHslMAAAAJ&hl=en" class="social-icon" target="_blank" title="Google Scholar">gs</a>
+        </div>
+      </div>
+
+      <!-- Decorative orbit graphic -->
+      <div class="hero-visual">
+        <div class="orbit-ring orbit-1"><div class="orbit-dot"></div></div>
+        <div class="orbit-ring orbit-2"><div class="orbit-dot"></div></div>
+        <div class="orbit-ring orbit-3"><div class="orbit-dot"></div></div>
+        <div class="center-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── About ───────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">Background</p>
+    <h2 class="section-title">About <em>Me</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I am a PhD Candidate in the Department of Physics and Astronomy at the
+          <strong>University of Louisville</strong> in Louisville, Kentucky. My work sits at the
+          intersection of observational astronomy and data-driven methods, with a focus on
+          galaxy-scale and cosmological questions.
+        </p>
+        <p>
+          I received my BS in Physics from <strong>Western Kentucky University</strong> under the
+          mentorship of Dr. Michael Carini, where I also contributed to instrumentation work
+          characterizing optical turbulence at the GMT site.
+        </p>
+        <p>
+          Beyond research, I'm passionate about science communication, mentoring the next
+          generation of astronomers, and building community within academic spaces.
+        </p>
+        <p>
+          I expect to complete my PhD in <strong>Spring 2026</strong> and am actively exploring
+          postdoctoral opportunities.
+        </p>
+      </div>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <div class="fact-label">Institution</div>
+          <div class="fact-value">University of Louisville</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-label">Department</div>
+          <div class="fact-value">Physics & Astronomy</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-label">Degree</div>
+          <div class="fact-value">PhD Candidate</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-label">Expected</div>
+          <div class="fact-value">Spring 2026</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-label">BS Institution</div>
+          <div class="fact-value">Western Kentucky University</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-label">BS Field</div>
+          <div class="fact-value">Physics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Research ────────────────────────────────────────────── -->
+<section id="research">
+  <div class="container">
+    <p class="section-label">Science</p>
+    <h2 class="section-title">Research <em>Interests</em></h2>
+    <p class="research-intro">
+      I tend to find myself drawn to large-scale questions — how galaxies evolve as a
+      population, how gas reservoirs correlate with star formation rates across cosmic time,
+      and how we build and improve the instrumentation that lets us ask those questions at all.
+    </p>
+    <div class="research-cards">
+      <div class="research-card">
+        <div class="rc-icon">🌌</div>
+        <div class="rc-title">Galaxy Evolution</div>
+        <p class="rc-desc">
+          Understanding the structural and morphological evolution of galaxies across cosmic
+          time using large photometric and spectroscopic surveys. Including work with
+          self-organizing maps applied to the GAMA survey.
+        </p>
+      </div>
+      <div class="research-card">
+        <div class="rc-icon">⭐</div>
+        <div class="rc-title">Star Formation & Gas</div>
+        <p class="rc-desc">
+          Examining how cold gas reservoirs regulate star formation rates on galactic scales,
+          including resolved and integrated studies of the interstellar medium and its
+          relationship to stellar populations.
+        </p>
+      </div>
+      <div class="research-card">
+        <div class="rc-icon">🔭</div>
+        <div class="rc-title">Astronomical Instrumentation</div>
+        <p class="rc-desc">
+          Design and characterization of astronomical instruments, including the MooSci lunar
+          scintillometer and MASS-DIMM turbulence profiling at the GMT site in Chile.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Publications ────────────────────────────────────────── -->
+<section id="publications">
+  <div class="container">
+    <p class="section-label">Peer-Reviewed Work</p>
+    <h2 class="section-title">Select <em>Publications</em></h2>
+    <div class="pub-list">
+
+      <div class="pub-item">
+        <div class="pub-year">2022</div>
+        <div>
+          <div class="pub-title">Galaxy and Mass Assembly (GAMA): Self-organizing Map Application on Nearby Galaxies</div>
+          <div class="pub-authors">Holwerda, B. W., et al. including Cook, K. W.</div>
+          <div class="pub-journal">MNRAS, 513, 2, 1972</div>
+          <a href="https://ui.adsabs.harvard.edu/abs/2022MNRAS.513.1972H/abstract" class="pub-link" target="_blank">ADS ↗</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2012</div>
+        <div>
+          <div class="pub-title">Characterizing Optical Turbulence at the GMT site with MooSci and MASS-DIMM</div>
+          <div class="pub-authors">Thomas-Osip, J.E., Prieto, G., Berdja, A., Cook, K. W., et al.</div>
+          <div class="pub-journal">PASP, 124, 84</div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2012</div>
+        <div>
+          <div class="pub-title">Design of the MooSci Lunar Scintillometer</div>
+          <div class="pub-authors">Cook, K.W., DePoy, D. L., Marshall, J. L., Villanueva Jr., S., et al.</div>
+          <div class="pub-journal">Bulletin of the American Astronomical Society, 219, 422.14</div>
+          <a href="https://ui.adsabs.harvard.edu/abs/2012AAS...21942214C/abstract" class="pub-link" target="_blank">ADS ↗</a>
+        </div>
+      </div>
+
+    </div>
+    <p class="publications-note">
+      Full publication list on
+      <a href="https://scholar.google.com/citations?user=28cHslMAAAAJ&hl=en" target="_blank">Google Scholar</a>
+      and
+      <a href="https://orcid.org/0000-0002-4012-779X" target="_blank">ORCID</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ─── CV / Experience ──────────────────────────────────────── -->
+<section id="cv">
+  <div class="container">
+    <p class="section-label">Curriculum Vitae</p>
+    <h2 class="section-title">Education &amp; <em>Experience</em></h2>
+    <div class="cv-cols">
+
+      <!-- Education -->
+      <div>
+        <div class="cv-section-title">Education</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div>
+              <div class="tl-date">2020 – Present</div>
+              <div class="tl-title">PhD in Physics & Astronomy</div>
+              <div class="tl-sub">University of Louisville, KY</div>
+              <div class="tl-desc">Research focus on galaxy evolution, star formation, and data-driven classification. Advisor: Prof. [Advisor Name].</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div>
+              <div class="tl-date">20XX – 20XX</div>
+              <div class="tl-title">BS in Physics</div>
+              <div class="tl-sub">Western Kentucky University</div>
+              <div class="tl-desc">Graduated with distinction. Undergraduate research under Dr. Michael Carini in observational astronomy and instrumentation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research Experience -->
+      <div>
+        <div class="cv-section-title">Research Experience</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div>
+              <div class="tl-date">2020 – Present</div>
+              <div class="tl-title">Graduate Research Assistant</div>
+              <div class="tl-sub">University of Louisville</div>
+              <div class="tl-desc">Galaxy morphology classification using self-organizing maps; GAMA survey analysis; interstellar medium properties.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div>
+              <div class="tl-date">20XX – 20XX</div>
+              <div class="tl-title">Undergraduate Research Assistant</div>
+              <div class="tl-sub">Western Kentucky University</div>
+              <div class="tl-desc">Instrumentation design and testing for the MooSci lunar scintillometer; optical turbulence characterization at Chilean observatory sites.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div></div>
+            <div>
+              <div class="tl-date">20XX</div>
+              <div class="tl-title">Astronomical Instrumentation Collaborator</div>
+              <div class="tl-sub">GMT Site Survey Team</div>
+              <div class="tl-desc">Contributed to MASS-DIMM turbulence profiling campaign supporting the Giant Magellan Telescope site selection.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cv-download">
+      <a href="CV_KyleCook.pdf" class="btn btn-outline" target="_blank">↓ Download Full CV (PDF)</a>
+      <p style="margin-top:.75rem; font-size:.78rem; color:var(--text-dim);">Last updated: [Month Year] — replace CV_KyleCook.pdf with your actual file path</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Service ──────────────────────────────────────────────── -->
+<section id="service">
+  <div class="container">
+    <p class="section-label">Community</p>
+    <h2 class="section-title">Service &amp; <em>Outreach</em></h2>
+    <div class="service-grid">
+
+      <div class="service-card">
+        <span class="service-tag tag-outreach">Outreach</span>
+        <div class="service-title">Public Astronomy Nights</div>
+        <div class="service-meta">University of Louisville · Ongoing</div>
+        <p class="service-desc">Organize and lead public telescope viewing events, presenting astronomy to community members of all ages in the Louisville area.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag tag-review">Peer Review</span>
+        <div class="service-title">Journal Referee</div>
+        <div class="service-meta">[Journal Name] · Year–Present</div>
+        <p class="service-desc">Serve as a referee for peer-reviewed manuscripts in observational extragalactic astronomy and instrumentation.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag tag-committee">Committee</span>
+        <div class="service-title">Graduate Student Representative</div>
+        <div class="service-meta">Department of Physics & Astronomy · Year–Year</div>
+        <p class="service-desc">Represented graduate student interests on departmental committees, advocating for curriculum changes and student resources.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag tag-mentoring">Mentoring</span>
+        <div class="service-title">Undergraduate Research Mentor</div>
+        <div class="service-meta">University of Louisville · Ongoing</div>
+        <p class="service-desc">Mentored undergraduate students through research projects involving data reduction, Python programming, and scientific writing.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Blog / Notes ─────────────────────────────────────────── -->
+<section id="notes">
+  <div class="container">
+    <p class="section-label">Thinking Out Loud</p>
+    <h2 class="section-title">Research Notes &amp; <em>Musings</em></h2>
+    <div class="blog-grid">
+
+      <div class="blog-card">
+        <span class="blog-tag">Galaxy Evolution</span>
+        <div class="blog-date">Month DD, YYYY</div>
+        <div class="blog-title">Why Self-Organizing Maps Are Underused in Astronomy</div>
+        <p class="blog-excerpt">
+          A reflection on machine learning tools that have been around for decades but rarely
+          make it into the astronomer's toolbox — and why they should.
+        </p>
+        <a href="#" class="blog-read-more">Read more →</a>
+      </div>
+
+      <div class="blog-card">
+        <span class="blog-tag">Instrumentation</span>
+        <div class="blog-date">Month DD, YYYY</div>
+        <div class="blog-title">Lessons from Building a Lunar Scintillometer</div>
+        <p class="blog-excerpt">
+          A behind-the-scenes look at what it actually takes to design and deploy a ground-based
+          atmospheric monitor at a remote observatory site.
+        </p>
+        <a href="#" class="blog-read-more">Read more →</a>
+      </div>
+
+      <div class="blog-card">
+        <span class="blog-tag">Opinion</span>
+        <div class="blog-date">Month DD, YYYY</div>
+        <div class="blog-title">On Big Questions vs. Deep Dives in Astrophysics</div>
+        <p class="blog-excerpt">
+          The tension between studying a single object in exquisite detail and asking
+          population-level questions about the universe — and why I keep choosing the latter.
+        </p>
+        <a href="#" class="blog-read-more">Read more →</a>
+      </div>
+
+    </div>
+    <div class="blog-cta">
+      <a href="notes.html" class="btn btn-outline">View All Notes</a>
+      <p style="margin-top:.75rem; font-size:.78rem; color:var(--text-dim);">
+        Placeholder entries — replace with links to your actual posts or a notes.html page.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Contact ──────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">Contact <em>Me</em></h2>
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <p>Feel free to reach out about research collaborations, speaking invitations, or general questions about astrophysics.</p>
+        <div class="address-block">
+          <strong>Kyle W. Cook</strong><br>
+          Department of Physics and Astronomy<br>
+          University of Louisville<br>
+          Natural Sciences Building<br>
+          215 Eastern Pkwy Unit 102<br>
+          Louisville, KY 40208
+        </div>
+        <div class="contact-social">
+          <a href="http://www.linkedin.com/in/kwcook3824" class="social-pill" target="_blank">LinkedIn</a>
+          <a href="https://orcid.org/0000-0002-4012-779X" class="social-pill" target="_blank">ORCID</a>
+          <a href="https://scholar.google.com/citations?user=28cHslMAAAAJ&hl=en" class="social-pill" target="_blank">Scholar</a>
+        </div>
+      </div>
+
+      <!-- Static contact form — wire up with Formspree or Netlify Forms -->
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="first_name" required placeholder="Jane" />
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="last_name" placeholder="Doe" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="jane@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="Research collaboration" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required placeholder="Your message..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ───────────────────────────────────────────────── -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-name">Kyle W. Cook</div>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-copy">&copy; <span id="year"></span> Kyle W. Cook · University of Louisville</div>
+  </div>
+</footer>
+
+<!-- ─── Scripts ──────────────────────────────────────────────── -->
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const toggle = document.getElementById('navToggle');
+  const links  = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  /* no canvas — background is a fixed div */
+</script>
+</body>
+</html>
