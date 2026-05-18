@@ -64,7 +64,7 @@
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
-      opacity: 0.85;
+      opacity: 0.45;
       pointer-events: none;
     }
 
@@ -293,7 +293,7 @@
     }
     .social-icon:hover { border-color: var(--accent3); color: var(--accent3); }
 
-    /* orbit graphic */
+    /* ─── Hero galaxy canvas ────────────────────────────────── */
     .hero-visual {
       position: relative;
       width: 360px;
@@ -303,35 +303,11 @@
       flex-shrink: 0;
     }
 
-    .orbit-ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(126, 184, 247, .15);
-    }
-
-    .orbit-1 { width: 100%; height: 100%; top: 0; left: 0; animation: spin 40s linear infinite; }
-    .orbit-2 { width: 70%; height: 70%; top: 15%; left: 15%; animation: spin 25s linear infinite reverse; }
-    .orbit-3 { width: 40%; height: 40%; top: 30%; left: 30%; animation: spin 15s linear infinite; }
-
-    .orbit-dot {
-      position: absolute;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      top: -3px; left: calc(50% - 3px);
-    }
-
-    .orbit-1 .orbit-dot { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
-    .orbit-2 .orbit-dot { background: var(--accent2); box-shadow: 0 0 10px var(--accent2); }
-    .orbit-3 .orbit-dot { background: var(--accent3); box-shadow: 0 0 8px var(--accent3); }
-
-    .center-glow {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(126,184,247,.5) 0%, transparent 70%);
-      box-shadow: 0 0 60px rgba(126,184,247,.3);
+    #galaxy-canvas {
+      width: 360px;
+      height: 360px;
+      animation: spin 90s linear infinite;
+      transform-origin: center center;
     }
 
     /* ─── About / Quick facts ───────────────────────────────── */
@@ -911,12 +887,9 @@
         </div>
       </div>
 
-      <!-- Decorative orbit graphic -->
+      <!-- Spiral galaxy graphic -->
       <div class="hero-visual">
-        <div class="orbit-ring orbit-1"><div class="orbit-dot"></div></div>
-        <div class="orbit-ring orbit-2"><div class="orbit-dot"></div></div>
-        <div class="orbit-ring orbit-3"><div class="orbit-dot"></div></div>
-        <div class="center-glow"></div>
+        <canvas id="galaxy-canvas" width="360" height="360"></canvas>
       </div>
     </div>
   </div>
@@ -1309,6 +1282,131 @@
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
   /* no canvas — background is a fixed div */
+
+  /* ── Spiral galaxy hero graphic ─────────────────────────────
+     Draws a face-on logarithmic spiral galaxy once onto a canvas.
+     CSS handles the slow rotation — zero per-frame JS cost.
+  ─────────────────────────────────────────────────────────── */
+  (function () {
+    const canvas = document.getElementById('galaxy-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = 360, H = 360, cx = W / 2, cy = H / 2;
+
+    function rng(seed) {
+      let s = (seed ^ 0xdeadbeef) >>> 0;
+      return () => { s ^= s << 13; s ^= s >> 17; s ^= s << 5; return (s >>> 0) / 4294967296; };
+    }
+    const r = rng(42);
+
+    /* ── 1. Galactic core glow ── */
+    const coreGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 38);
+    coreGrad.addColorStop(0,   'rgba(255, 245, 200, 0.95)');
+    coreGrad.addColorStop(0.2, 'rgba(220, 190, 140, 0.7)');
+    coreGrad.addColorStop(0.6, 'rgba(150, 130, 200, 0.25)');
+    coreGrad.addColorStop(1,   'rgba(80,  90,  180, 0)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, 38, 0, Math.PI * 2);
+    ctx.fillStyle = coreGrad;
+    ctx.fill();
+
+    /* ── 2. Spiral arms — logarithmic spiral: r = a * e^(b*theta) ── */
+    const NUM_ARMS = 2;
+    const ARM_COLORS = [
+      [ [180, 210, 255], [120, 160, 255], [80, 110, 220] ],  /* blue arm */
+      [ [255, 220, 160], [220, 180, 120], [180, 140, 100] ],  /* warm arm */
+    ];
+
+    function spiralPoint(theta, a, b) {
+      const rad = a * Math.exp(b * theta);
+      return [cx + rad * Math.cos(theta), cy + rad * Math.sin(theta)];
+    }
+
+    for (let arm = 0; arm < NUM_ARMS; arm++) {
+      const baseAngle = (arm / NUM_ARMS) * Math.PI * 2;
+      const colors = ARM_COLORS[arm];
+
+      /* Draw arm as a thick tapered stroke, then scatter stars over it */
+      for (let pass = 0; pass < 3; pass++) {
+        const [rr, gg, bb] = colors[pass];
+        const width  = [7, 4, 2][pass];
+        const alpha  = [0.18, 0.28, 0.20][pass];
+        const aParam = [10, 11, 12][pass];
+
+        ctx.beginPath();
+        let first = true;
+        for (let theta = 0; theta <= Math.PI * 2.8; theta += 0.04) {
+          const [px, py] = spiralPoint(theta + baseAngle, aParam, 0.28);
+          if (px < 0 || px > W || py < 0 || py > H) continue;
+          if (first) { ctx.moveTo(px, py); first = false; }
+          else ctx.lineTo(px, py);
+        }
+        ctx.strokeStyle = `rgba(${rr},${gg},${bb},${alpha})`;
+        ctx.lineWidth   = width;
+        ctx.lineCap     = 'round';
+        ctx.stroke();
+      }
+    }
+
+    /* ── 3. Diffuse halo ── */
+    const haloGrad = ctx.createRadialGradient(cx, cy, 30, cx, cy, 160);
+    haloGrad.addColorStop(0,   'rgba(100, 110, 200, 0.12)');
+    haloGrad.addColorStop(0.5, 'rgba(70,  80,  170, 0.06)');
+    haloGrad.addColorStop(1,   'rgba(40,  50,  120, 0)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, 160, 0, Math.PI * 2);
+    ctx.fillStyle = haloGrad;
+    ctx.fill();
+
+    /* ── 4. Star population scattered along arms + random field ── */
+    function drawStar(x, y, radius, rr, gg, bb, a) {
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${rr},${gg},${bb},${a})`;
+      ctx.fill();
+    }
+
+    /* Stars along spiral arms */
+    for (let arm = 0; arm < NUM_ARMS; arm++) {
+      const baseAngle = (arm / NUM_ARMS) * Math.PI * 2;
+      for (let theta = 0.3; theta <= Math.PI * 2.6; theta += 0.08) {
+        const [px, py] = spiralPoint(theta + baseAngle, 11, 0.28);
+        if (px < 2 || px > W-2 || py < 2 || py > H-2) continue;
+        const scatter = (r() - 0.5) * 14;
+        const scatter2 = (r() - 0.5) * 14;
+        const bright = r() > 0.85;
+        const rad = bright ? r() * 1.5 + 0.8 : r() * 0.8 + 0.2;
+        const al  = bright ? r() * 0.5 + 0.5 : r() * 0.3 + 0.1;
+        /* Mix blue-white and warm yellow stars */
+        const warm = r() > 0.5;
+        drawStar(px + scatter, py + scatter2, rad,
+          warm ? 255 : 180,
+          warm ? 230 : 210,
+          warm ? 160 : 255,
+          al);
+      }
+    }
+
+    /* Random field stars (older stellar population) */
+    for (let i = 0; i < 320; i++) {
+      const angle = r() * Math.PI * 2;
+      const dist  = Math.pow(r(), 0.6) * 155;
+      const x = cx + Math.cos(angle) * dist;
+      const y = cy + Math.sin(angle) * dist;
+      const rad = r() * 0.7 + 0.15;
+      const al  = r() * 0.35 + 0.05;
+      drawStar(x, y, rad, 220, 215, 200, al);
+    }
+
+    /* ── 5. Bright core stars ── */
+    for (let i = 0; i < 18; i++) {
+      const angle = r() * Math.PI * 2;
+      const dist  = Math.pow(r(), 1.8) * 28;
+      const x = cx + Math.cos(angle) * dist;
+      const y = cy + Math.sin(angle) * dist;
+      drawStar(x, y, r() * 1.2 + 0.5, 255, 250, 220, r() * 0.6 + 0.4);
+    }
+  })();
 </script>
 </body>
 </html>
