@@ -268,11 +268,13 @@
     .btn-primary:hover { background: #fff; color: #080912; }
 
     .btn-outline {
-      background: transparent;
+      background: rgba(8, 9, 15, 0.6);
       color: var(--text-muted);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(100, 130, 200, 0.45);
+      box-shadow: 0 2px 12px rgba(0,0,0,.4);
+      backdrop-filter: blur(6px);
     }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(8,9,15,0.75); }
 
     .hero-social {
       display: flex;
@@ -285,13 +287,16 @@
     .social-icon {
       width: 36px; height: 36px;
       display: flex; align-items: center; justify-content: center;
-      border: 1px solid var(--border);
+      background: rgba(8, 9, 15, 0.6);
+      border: 1px solid rgba(100, 130, 200, 0.45);
       border-radius: 3px;
       color: var(--text-muted);
       font-size: .8rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.4);
+      backdrop-filter: blur(6px);
       transition: .2s;
     }
-    .social-icon:hover { border-color: var(--accent3); color: var(--accent3); }
+    .social-icon:hover { border-color: var(--accent3); color: var(--accent3); background: rgba(8,9,15,0.8); }
     .email-icon { font-size: 1rem; }
  
     .hero-email {
