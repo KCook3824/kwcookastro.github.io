@@ -64,7 +64,7 @@
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
-      opacity: 0.45;
+      opacity: 0.2;
       pointer-events: none;
     }
 
@@ -292,6 +292,39 @@
       transition: .2s;
     }
     .social-icon:hover { border-color: var(--accent3); color: var(--accent3); }
+    .email-icon { font-size: 1rem; }
+ 
+    .hero-email {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      margin-top: 1rem;
+      margin-bottom: .5rem;
+      opacity: 0;
+      animation: fadeUp .7s .7s forwards;
+    }
+ 
+    .email-label {
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+ 
+    .email-text {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: #fff;
+      letter-spacing: .05em;
+      background: rgba(126, 184, 247, .10);
+      border: 1px solid rgba(126, 184, 247, .40);
+      border-radius: 4px;
+      padding: .5rem 1.1rem;
+      box-shadow: 0 0 18px rgba(126, 184, 247, .12), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .email-at, .email-dot {
+      color: var(--gold);
+      font-style: normal;
+    }
 
     /* ─── Hero galaxy image ─────────────────────────────────── */
     .hero-visual {
@@ -851,7 +884,7 @@
 <!-- ─── Navigation ──────────────────────────────────────────── -->
 <nav>
   <div class="nav-inner">
-    <a href="#home" class="nav-logo">Kyle W. <span>Cook</span></a>
+    <a href="#home" class="nav-logo">Kyle W. Cook</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
@@ -859,7 +892,6 @@
       <li><a href="#cv">CV</a></li>
       <li><a href="#service">Service</a></li>
       <li><a href="#notes">Notes</a></li>
-      <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -875,6 +907,12 @@
         <p class="hero-eyebrow">Ph.D Candidate · Physics & Astronomy</p>
         <h1 class="hero-name">Kyle W.<strong>Cook</strong></h1>
         <p class="hero-title">Astrophysicist</p>
+        <div class="hero-email">
+          <span class="email-label">✉</span>
+          <span class="email-text">
+            <span>kyle.cook@louisville.edu</span>
+          </span>
+        </div>
         <p class="hero-bio">
           I study the large-scale questions of the universe — how galaxies evolve, how gas
           correlates with star formation, and the instrumentation that makes it all possible.
@@ -882,7 +920,7 @@
         </p>
         <div class="hero-links">
           <a href="#research" class="btn btn-primary">View Research</a>
-          <a href="CV_KyleCook.pdf" class="btn btn-outline" target="_blank">Download CV</a>
+          <a href="CookCVCurrent.pdf" class="btn btn-outline" target="_blank">Download CV</a>
         </div>
         <div class="hero-social">
           <a href="http://www.linkedin.com/in/kwcook3824" class="social-icon" target="_blank" title="LinkedIn">in</a>
@@ -907,11 +945,13 @@
     <div class="about-grid">
       <div class="about-text">
         <p>
-          I am a PhD Candidate in the Department of Physics and Astronomy at the
+          I am a Ph.D Candidate in the Department of Physics and Astronomy at the
           <strong>University of Louisville</strong> in Louisville, Kentucky. My Ph.D work is focused on the 
-          neutral gas content of galaxies and its connection to the star formation rate. I am also interested in the
+          neutral gas content of galaxies and its connection to the star formation rate. Spectral Energy Distribution fitting
+          drives a large portion of my work, with the aim of accurate recovery of star formation histories. 
+          I am also interested in the
           chemical evolution of galaxies and the subsequenct enrichment of the circumgalatic and intergalactica medium.
-          I'm also interested in the development of both the poeple and the instrumentation of the future of astrophysics.
+          Additionally, the development of both the poeple and the instrumentation of the future of astrophysics is of high interest.
 
         </p>
         <p>
@@ -919,11 +959,7 @@
           mentorship of Dr. Michael Carini, where I studied Blazars, the extreme end of the AGN types where a jet is directed at the Earth.
         </p>
         <p>
-          Beyond research, I'm passionate about science communication, mentoring the next
-          generation of astronomers, and building community within academic spaces.
-        </p>
-        <p>
-          I expect to complete my PhD in <strong>Spring 2026</strong> and am actively exploring
+          I expect to complete my PhD in <strong>Spring 2027</strong> and am actively exploring
           postdoctoral opportunities.
         </p>
       </div>
@@ -938,19 +974,11 @@
         </div>
         <div class="fact-card">
           <div class="fact-label">Degree</div>
-          <div class="fact-value">PhD Candidate</div>
+          <div class="fact-value">Ph.D Candidate</div>
         </div>
         <div class="fact-card">
           <div class="fact-label">Expected</div>
-          <div class="fact-value">Spring 2026</div>
-        </div>
-        <div class="fact-card">
-          <div class="fact-label">BS Institution</div>
-          <div class="fact-value">Western Kentucky University</div>
-        </div>
-        <div class="fact-card">
-          <div class="fact-label">BS Field</div>
-          <div class="fact-value">Physics</div>
+          <div class="fact-value">Spring 2027</div>
         </div>
       </div>
     </div>
@@ -963,9 +991,10 @@
     <p class="section-label">Science</p>
     <h2 class="section-title">Research <em>Interests</em></h2>
     <p class="research-intro">
-      I tend to find myself drawn to large-scale questions — how galaxies evolve as a
-      population, how gas reservoirs correlate with star formation rates across cosmic time,
-      and how we build and improve the instrumentation that lets us ask those questions at all.
+      I tend to find myself drawn to population-scale questions — how galaxies evolve, 
+      how gas reservoirs correlate with star formation rates across cosmic time,
+      mapping the chemical evolution of the IGM/CGM,
+      and how we build and improve the instrumentation that enables us to answer those questions.
     </p>
     <div class="research-cards">
       <div class="research-card">
@@ -973,25 +1002,25 @@
         <div class="rc-title">Galaxy Evolution</div>
         <p class="rc-desc">
           Understanding the structural and morphological evolution of galaxies across cosmic
-          time using large photometric and spectroscopic surveys. Including work with
-          self-organizing maps applied to the GAMA survey.
+          time using large photometric surveys. SED fitting for the estimation of galaxy parameters and the recovery of
+          star formation histories. Disentangling quenching vs rejuvenating populations in the green valley.
         </p>
       </div>
       <div class="research-card">
         <div class="rc-icon">⭐</div>
         <div class="rc-title">Star Formation & Gas</div>
         <p class="rc-desc">
-          Examining how cold gas reservoirs regulate star formation rates on galactic scales,
-          including resolved and integrated studies of the interstellar medium and its
-          relationship to stellar populations.
+          Member of the LADUMA team studying the neutral hydrogen content of galaxies using the MeerKAT array.
+          Examining how the neutral gas content of a galaxy influences and controls its star formation rate.
         </p>
       </div>
       <div class="research-card">
         <div class="rc-icon">🔭</div>
         <div class="rc-title">Astronomical Instrumentation</div>
         <p class="rc-desc">
-          Design and characterization of astronomical instruments, including the MooSci lunar
-          scintillometer and MASS-DIMM turbulence profiling at the GMT site in Chile.
+          Interested in astronomical instrumentation including upcoming NASA missions including the Habitable Worlds 
+          Observatory. Previously worked on the MooSci lunar scintillometer for the site characterization of the 
+          Giant Magellan Telescope location.
         </p>
       </div>
     </div>
@@ -1006,21 +1035,22 @@
     <div class="pub-list">
 
       <div class="pub-item">
-        <div class="pub-year">2022</div>
+        <div class="pub-year">2025</div>
         <div>
-          <div class="pub-title">Galaxy and Mass Assembly (GAMA): Self-organizing Map Application on Nearby Galaxies</div>
-          <div class="pub-authors">Holwerda, B. W., et al. including Cook, K. W.</div>
-          <div class="pub-journal">MNRAS, 513, 2, 1972</div>
-          <a href="https://ui.adsabs.harvard.edu/abs/2022MNRAS.513.1972H/abstract" class="pub-link" target="_blank">ADS ↗</a>
+          <div class="pub-title">Investigating the Need for a Robust Ultraviolet Filter Set Aboard the Habitable Worlds Observatory</div>
+          <div class="pub-authors">Cook, K.W., Holwerda, B.W., Robertson, C.D.</div>
+          <div class="pub-journal">JATIS, 11, 4</div>
+          <a href="https://www.spiedigitallibrary.org/journals/Journal-of-Astronomical-Telescopes-Instruments-and-Systems/volume-11/issue-4/042228/Investigating-the-need-for-a-robust-ultraviolet-filter-set-aboard/10.1117/1.JATIS.11.4.042228.short" class="pub-link" target="_blank">JATIS ↗</a>
         </div>
       </div>
 
       <div class="pub-item">
-        <div class="pub-year">2012</div>
+        <div class="pub-year">2026</div>
         <div>
-          <div class="pub-title">Characterizing Optical Turbulence at the GMT site with MooSci and MASS-DIMM</div>
-          <div class="pub-authors">Thomas-Osip, J.E., Prieto, G., Berdja, A., Cook, K. W., et al.</div>
-          <div class="pub-journal">PASP, 124, 84</div>
+          <div class="pub-title">The Astrosky Ecosystem: An Independent Online Platform for Science Communication and Social Networking</div>
+          <div class="pub-authors">Hunt, E.L., Carpenter, V.S., Cook, K.W., et al.</div>
+          <div class="pub-journal">ArXiv</div>
+          <a href="https://arxiv.org/abs/2601.16838" class="pub-link" target="_blank">ArXiv ↗</a>
         </div>
       </div>
 
@@ -1059,18 +1089,18 @@
             <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
             <div>
               <div class="tl-date">2020 – Present</div>
-              <div class="tl-title">PhD in Physics & Astronomy</div>
+              <div class="tl-title">Ph.D in Physics & Astronomy</div>
               <div class="tl-sub">University of Louisville, KY</div>
-              <div class="tl-desc">Research focus on galaxy evolution, star formation, and data-driven classification. Advisor: Prof. [Advisor Name].</div>
+              <div class="tl-desc">Research focus on galaxy evolution, star formation, and data-driven classification. Advisor: Dr. Benne Holwerda</div>
             </div>
           </div>
           <div class="tl-item">
             <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
             <div>
-              <div class="tl-date">20XX – 20XX</div>
-              <div class="tl-title">BS in Physics</div>
+              <div class="tl-date">2010</div>
+              <div class="tl-title">B.S. in Physics</div>
               <div class="tl-sub">Western Kentucky University</div>
-              <div class="tl-desc">Graduated with distinction. Undergraduate research under Dr. Michael Carini in observational astronomy and instrumentation.</div>
+              <div class="tl-desc">Undergraduate research under Dr. Michael Carini in AGN/Blazar research.</div>
             </div>
           </div>
         </div>
@@ -1083,28 +1113,28 @@
           <div class="tl-item">
             <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
             <div>
-              <div class="tl-date">2020 – Present</div>
+              <div class="tl-date">2021 – Present</div>
               <div class="tl-title">Graduate Research Assistant</div>
               <div class="tl-sub">University of Louisville</div>
-              <div class="tl-desc">Galaxy morphology classification using self-organizing maps; GAMA survey analysis; interstellar medium properties.</div>
+              <div class="tl-desc">Galaxy Parameter Estimation with SED fitting, neutral gas supply, green valley galaxies.</div>
+            </div>
+          </div>
+            <div class="tl-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div></div>
+            <div>
+              <div class="tl-date">2010 - 2012</div>
+              <div class="tl-title">Research Assistant</div>
+              <div class="tl-sub">Munnerlyn Institute for Astrophysical Instrumentation</div>
+              <div class="tl-desc">Design and deployment of the second MooSci unit to GMT site. Additional programming tasks, especially using LabVIEW.</div>
             </div>
           </div>
           <div class="tl-item">
             <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
             <div>
-              <div class="tl-date">20XX – 20XX</div>
+              <div class="tl-date">2007 - 2010</div>
               <div class="tl-title">Undergraduate Research Assistant</div>
               <div class="tl-sub">Western Kentucky University</div>
-              <div class="tl-desc">Instrumentation design and testing for the MooSci lunar scintillometer; optical turbulence characterization at Chilean observatory sites.</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot-col"><div class="tl-dot"></div></div>
-            <div>
-              <div class="tl-date">20XX</div>
-              <div class="tl-title">Astronomical Instrumentation Collaborator</div>
-              <div class="tl-sub">GMT Site Survey Team</div>
-              <div class="tl-desc">Contributed to MASS-DIMM turbulence profiling campaign supporting the Giant Magellan Telescope site selection.</div>
+              <div class="tl-desc">Optical and Gamma Ray observations and analysis of Blazars. Bell Observatory telescope operator.</div>
             </div>
           </div>
         </div>
@@ -1113,8 +1143,8 @@
     </div>
 
     <div class="cv-download">
-      <a href="CV_KyleCook.pdf" class="btn btn-outline" target="_blank">↓ Download Full CV (PDF)</a>
-      <p style="margin-top:.75rem; font-size:.78rem; color:var(--text-dim);">Last updated: [Month Year] — replace CV_KyleCook.pdf with your actual file path</p>
+      <a href="CookCVCurrent.pdf" class="btn btn-outline" target="_blank">↓ Download Full CV (PDF)</a>
+      <p style="margin-top:.75rem; font-size:.78rem; color:var(--text-dim);">Last updated: [March 2023]</p>
     </div>
   </div>
 </section>
@@ -1127,31 +1157,35 @@
     <div class="service-grid">
 
       <div class="service-card">
-        <span class="service-tag tag-outreach">Outreach</span>
-        <div class="service-title">Public Astronomy Nights</div>
-        <div class="service-meta">University of Louisville · Ongoing</div>
-        <p class="service-desc">Organize and lead public telescope viewing events, presenting astronomy to community members of all ages in the Louisville area.</p>
+        <span class="service-tag tag-outreach">Science Analysis</span>
+        <div class="service-title">Red Limit SAG</div>
+        <div class="service-meta">NASA · Ongoing</div>
+        <p class="service-desc">Aid in leading the science analysis group focused on determining the science cases for 
+          the longest wavelength cutoff for the Habitable Worlds Observatory.
+        </p>
       </div>
 
       <div class="service-card">
-        <span class="service-tag tag-review">Peer Review</span>
-        <div class="service-title">Journal Referee</div>
-        <div class="service-meta">[Journal Name] · Year–Present</div>
-        <p class="service-desc">Serve as a referee for peer-reviewed manuscripts in observational extragalactic astronomy and instrumentation.</p>
-      </div>
-
-      <div class="service-card">
-        <span class="service-tag tag-committee">Committee</span>
-        <div class="service-title">Graduate Student Representative</div>
-        <div class="service-meta">Department of Physics & Astronomy · Year–Year</div>
-        <p class="service-desc">Represented graduate student interests on departmental committees, advocating for curriculum changes and student resources.</p>
-      </div>
-
-      <div class="service-card">
-        <span class="service-tag tag-mentoring">Mentoring</span>
+        <span class="service-tag tag-review">Mentoring</span>
         <div class="service-title">Undergraduate Research Mentor</div>
         <div class="service-meta">University of Louisville · Ongoing</div>
-        <p class="service-desc">Mentored undergraduate students through research projects involving data reduction, Python programming, and scientific writing.</p>
+        <p class="service-desc">Mentoring undergraduate students in astronomical research. Five students mentored with one receiveing a MURC grant from UofL.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag tag-committee">University</span>
+        <div class="service-title">Executive Board Member of Graduate Student Council</div>
+        <div class="service-meta">Univeristy of Louisville · 2022 - 2026</div>
+        <p class="service-desc">Served as President, Vice-President, and Director of Professional Development, managing
+          financials, people, and executing a regional multidisciplinary research conference
+        </p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag tag-mentoring">Outreach</span>
+        <div class="service-title">Lead Moderator</div>
+        <div class="service-meta">The Astrosky Ecosystem · Ongoing</div>
+        <p class="service-desc">Serving as lead moderator for the AstroSky Ecosystem, encouraging and growing an international community of professional and amatuer astronomers.</p>
       </div>
 
     </div>
@@ -1166,99 +1200,38 @@
     <div class="blog-grid">
 
       <div class="blog-card">
-        <span class="blog-tag">Galaxy Evolution</span>
-        <div class="blog-date">Month DD, YYYY</div>
-        <div class="blog-title">Why Self-Organizing Maps Are Underused in Astronomy</div>
+        <span class="blog-tag">Nothing here yet</span>
+        <div class="blog-date">TBD</div>
+        <div class="blog-title">Incoming</div>
         <p class="blog-excerpt">
-          A reflection on machine learning tools that have been around for decades but rarely
-          make it into the astronomer's toolbox — and why they should.
+          A marvelously blank entry until I get around to it.
         </p>
         <a href="#" class="blog-read-more">Read more →</a>
       </div>
 
       <div class="blog-card">
-        <span class="blog-tag">Instrumentation</span>
-        <div class="blog-date">Month DD, YYYY</div>
-        <div class="blog-title">Lessons from Building a Lunar Scintillometer</div>
+        <span class="blog-tag">Nothing here yet</span>
+        <div class="blog-date">TBD</div>
+        <div class="blog-title">Incoming</div>
         <p class="blog-excerpt">
-          A behind-the-scenes look at what it actually takes to design and deploy a ground-based
-          atmospheric monitor at a remote observatory site.
+          A marvesouly black entry until I get around to it.
         </p>
         <a href="#" class="blog-read-more">Read more →</a>
       </div>
 
       <div class="blog-card">
-        <span class="blog-tag">Opinion</span>
-        <div class="blog-date">Month DD, YYYY</div>
-        <div class="blog-title">On Big Questions vs. Deep Dives in Astrophysics</div>
+        <span class="blog-tag">Nothing here yet</span>
+        <div class="blog-date">TBD</div>
+        <div class="blog-title">Incoming</div>
         <p class="blog-excerpt">
-          The tension between studying a single object in exquisite detail and asking
-          population-level questions about the universe — and why I keep choosing the latter.
+          A marvelously black entry until I get around to writing one.
         </p>
         <a href="#" class="blog-read-more">Read more →</a>
       </div>
 
     </div>
     <div class="blog-cta">
-      <a href="notes.html" class="btn btn-outline">View All Notes</a>
-      <p style="margin-top:.75rem; font-size:.78rem; color:var(--text-dim);">
-        Placeholder entries — replace with links to your actual posts or a notes.html page.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Contact ──────────────────────────────────────────────── -->
-<section id="contact">
-  <div class="container">
-    <p class="section-label">Get in Touch</p>
-    <h2 class="section-title">Contact <em>Me</em></h2>
-    <div class="contact-grid">
-
-      <div class="contact-info">
-        <p>Feel free to reach out about research collaborations, speaking invitations, or general questions about astrophysics.</p>
-        <div class="address-block">
-          <strong>Kyle W. Cook</strong><br>
-          Department of Physics and Astronomy<br>
-          University of Louisville<br>
-          Natural Sciences Building<br>
-          215 Eastern Pkwy Unit 102<br>
-          Louisville, KY 40208
-        </div>
-        <div class="contact-social">
-          <a href="http://www.linkedin.com/in/kwcook3824" class="social-pill" target="_blank">LinkedIn</a>
-          <a href="https://orcid.org/0000-0002-4012-779X" class="social-pill" target="_blank">ORCID</a>
-          <a href="https://scholar.google.com/citations?user=28cHslMAAAAJ&hl=en" class="social-pill" target="_blank">Scholar</a>
-        </div>
-      </div>
-
-      <!-- Static contact form — wire up with Formspree or Netlify Forms -->
-      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" name="first_name" required placeholder="Jane" />
-          </div>
-          <div class="form-group">
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="last_name" placeholder="Doe" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" required placeholder="jane@example.com" />
-        </div>
-        <div class="form-group">
-          <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" placeholder="Research collaboration" />
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" required placeholder="Your message..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
-      </form>
-
+      <a href="posts/notes_index.html" class="btn btn-outline">View All Notes</a>
     </div>
   </div>
 </section>
@@ -1271,7 +1244,6 @@
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
-      <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="footer-copy">&copy; <span id="year"></span> Kyle W. Cook · University of Louisville</div>
   </div>
